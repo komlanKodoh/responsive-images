@@ -1,0 +1,30 @@
+<div class=" relative max-w-screen-xl w-full m-auto py-28 text-center text-gray-900">
+  <h1 class=" text-6xl tracking-wider font-extrabold">Responsive images made easy</h1>
+  <span class=" text-xl leading-5 block"> Improve your load times and obtain amazing light house scores</span><br />
+  <a mat-raised-button color="primary" href="#upload">Get Started</a>
+
+  <div class="-z-20 absolute top-16 right-16 bg-amber-500 p-5 rounded-full dynamic-animated">
+  </div>
+</div>
+
+<div id="#upload" class="grid grid-cols-1 sm:grid-cols-2 max-w-screen-lg w-full m-auto gap-5">
+
+  <app-image-input class="bg-green-500 h-[200px]" (newImageEvent)="syncFile($event)"></app-image-input>
+
+  <form [formGroup]="optimizationConfig">
+
+    <p> Choose image formats </p>
+    <mat-checkbox formControlName="jpeg" class="block" color="primary"> Jpeg </mat-checkbox>
+    <mat-checkbox formControlName="webp" class="block" color="primary"> WebP </mat-checkbox>
+
+    <mat-form-field formControlName="fileName" appearance="standard" class="block">
+      <!-- <mat-label>File name </mat-label> -->
+      <input formControlName="fileName" matInput extension="Just name no file extension"
+        matTooltip="Info about the action">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="onSubmit($event)"> Optimize </button>
+
+  </form>
+
+</div>
