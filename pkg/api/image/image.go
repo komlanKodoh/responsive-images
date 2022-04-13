@@ -10,7 +10,9 @@ import (
 	"image"
 	"image/jpeg"
 	"io/ioutil"
+	"os"
 	"path/filepath"
+	"time"
 )
 
 // NewService : Creates an image service
@@ -23,6 +25,8 @@ type Service struct{}
 func (service Service) RegisterRoutes(routerGroup *gin.RouterGroup) {
 	routerGroup.POST("/", handlePost)
 }
+
+var FileLiveSpan = 10 * time.Minute
 
 // handlePost : handles post requests
 func handlePost(context *gin.Context) {
@@ -57,15 +61,21 @@ func handlePost(context *gin.Context) {
 		fmt.Println(err)
 	}
 
-	fileName := fileNameWithoutExtSliceNotation(header.Filename) + ".zip"
+	id, _ := genId()
+	filePath := "./static/" + fileNameWithoutExtSliceNotation(header.Filename) + "-" + id + ".zip"
 
-	ioutil.WriteFile("./static/"+fileName, zipBuffer.Bytes(), 0777)
+	ioutil.WriteFile(filePath, zipBuffer.Bytes(), 0777)
+
+	time.AfterFunc(FileLiveSpan, func() {
+		os.Remove(filePath)
+	})
 }
 
 func fileNameWithoutExtSliceNotation(fileName string) string {
 	return fileName[:len(fileName)-len(filepath.Ext(fileName))]
 }
 
+// zipImageVersion : adds version of an image with specific size to the zip
 func zipImageVersion(zipWriter *zip.Writer, image image.Image, width int) {
 	// resizing image to specific width
 	resizedImage := manipulations.Resize(image, width)
@@ -77,5 +87,4 @@ func zipImageVersion(zipWriter *zip.Writer, image image.Image, width int) {
 	// write of a webp version of the image
 	imageWebp, _ := zipWriter.Create(fmt.Sprintf("%v.webp", width))
 	jpeg.Encode(imageWebp, resizedImage, nil)
-
 }
