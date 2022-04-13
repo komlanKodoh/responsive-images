@@ -5,9 +5,9 @@ import (
 	"image"
 )
 
-// Crop : crop an image to the given dimensions
-func Crop(image image.Image) image.Image {
-	newImage := imaging.Resize(image, 200, 0, imaging.Lanczos)
+// Resize : crop an image to the given dimensions
+func Resize(image image.Image, width int) image.Image {
+	newImage := imaging.Resize(image, width, 0, imaging.Lanczos)
 
 	return newImage
 }

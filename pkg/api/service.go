@@ -13,7 +13,7 @@ type Api struct {
 	router *gin.Engine
 }
 
-// Run : start the api
+// Run : starts the api
 func (api Api) Run() {
 	api.router.Run()
 }

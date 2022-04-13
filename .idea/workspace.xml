@@ -5,8 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ef4bccb-fc2d-4da0-8c78-9ccf5e6a7317" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/utils/aws/aws.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/utils/aws/aws.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/api/api.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/api/api.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/api/image/Service.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/api/image/Service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/api/image/image.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/api/image/image.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/api/image/manipulations/manipulations.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/api/image/manipulations/manipulations.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/api/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/api/service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/utils/aws/aws.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
