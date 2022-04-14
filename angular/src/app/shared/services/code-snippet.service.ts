@@ -8,71 +8,64 @@ export class CodeSnippetService {
 
   getCSS() {
     return `
-    .wrapper {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .container {
-      flex: 1;
-      margin: 1em;
-      position: relative;
-      max-width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }`;
+.opt-img{
+  position: relative;
+}
+
+.opt-img > img {
+  top: 0;
+  left: 0;
+  z-index:  10;
+  position: absolute;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.opt-img.loaded > img {
+  opacity: 0;
+}
+
+    `;
   }
 
   getJavascript() {
     return `
-  export class BBoom {
 
-  constructor(private imageOptimizerService: ImageOptimizerService) {
-    this.optimizationConfig = imageOptimizerService.getOptimizationConfigForm();
-  }
+<script>
+    function onOptImgLoad(e){
+      const parent = e.target.parentNode.parentNode.classList.add("loaded");
+    } 
+</script>
 
-  syncFile(file: File): void {
-    this.file = file;
-  }
-
-  ngOnInit(): void {}
-
-  onSubmit(event: Event): void {
-    event.preventDefault();
-
-    let config = this.optimizationConfig.getRawValue() as OptimizationConfig;
-
-    if (!this.file) return;
-    this.imageOptimizerService
-      .optimize(this.file, config)
-      .subscribe((data: any) => console.log(data));
-  }
-
-
-  onHighlight(e: HighlightAutoResult) {
-    this.response = {
-      language: e.language,
-      relevance: e.relevance,
-      secondBest: '{...}',
-      value: '{...}'
-    }
-  }
-
-  }
 `;
   }
 
-  getHTML() {
+  getHTML(config: {
+    placeholder: string;
+    dimension: { width: number; height: number };
+    imagesURI: string;
+  }) {
     return `
-      <mat-tab-group mat-align-tabs="start" class="block" dynamicHeight >
-    <mat-tab label="CSS">
-      <pre><code [highlight]="code"  [lineNumbers]="true" (highlighted)="onHighlight($event)" ></code></pre>
-    </mat-tab>
-    <mat-tab label="Javascript">Content 2</mat-tab>
-    <mat-tab label="HTML">Content 3</mat-tab>
-  </mat-tab-group>
+<div class="opt-img">
+  <img src="${config.placeholder}"  decoding="async" > <img>
+
+  <picture>
+    <source type="image/webp" sizes="100vw"
+        srcset="${config.imagesURI}/200.webp 200w,
+                ${config.imagesURI}/400.webp 400w
+                ${config.imagesURI}/400.webp 700w" >
+
+    <img style="opacity: 1;" sizes="100vw" decoding="async" loading="lazy"
+        onLoad="onOptImgLoad"
+        alt="view it search preview"
+        src="${config.imagesURI}/200.png"
+        width="${config.dimension.width}"
+        height="${config.dimension.height}"
+        srcset="${config.imagesURI}/200.jpeg 200w,
+                ${config.imagesURI}/400.jpeg 400w
+                ${config.imagesURI}/400.jpeg 700w">
+  </picture>      
+
+</div>
     `;
   }
 }

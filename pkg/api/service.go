@@ -14,8 +14,8 @@ type Api struct {
 }
 
 // Run : starts the api
-func (api Api) Run() {
-	api.router.Run()
+func (api Api) Run(addr string) {
+	api.router.Run(addr)
 }
 
 // Mount : mounts services on api endpoints

@@ -11,6 +11,7 @@
 
   <app-image-input class="bg-gray-300" (newImageEvent)="syncFile($event)"></app-image-input>
 
+
   <form [formGroup]="optimizationConfig">
 
     <p> Choose image formats </p>
@@ -28,9 +29,11 @@
 
   </form>
 
+  <a mat-raised-button color="primary" [href]="zipUrl" [download]="zipName"> Download optimizeImage </a>
+
 </div>
 
-<mat-tab-group mat-align-tabs="start" class="block" dynamicHeight >
+<mat-tab-group mat-align-tabs="start" class="max-w-screen-lg m-auto" dynamicHeight >
   <mat-tab label="CSS">
     <pre><code [highlight]="getCSS()"  [lineNumbers]="true" (highlighted)="onHighlight($event)" ></code></pre>
   </mat-tab>

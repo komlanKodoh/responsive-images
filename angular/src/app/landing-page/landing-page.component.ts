@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HighlightAutoResult } from 'ngx-highlightjs';
-import { FormControl, FormGroup } from '@angular/forms';
-import { OptimizationConfig } from '../shared/services/image-optimizer.config';
+import {  FormGroup } from '@angular/forms';
 import { ImageOptimizerService } from '../shared/services/image-optimizer.service';
 import { CodeSnippetService } from '../shared/services/code-snippet.service';
+import { FileAndSize } from '../shared/components/image-input/image-input.component';
+import { HttpEventType } from '@angular/common/http';
+import {  OptimizationConfigForm } from '../shared/services/image-optimizer.config';
+import { extractFileName } from 'src/utils';
 
 @Component({
   selector: 'app-landing-page',
@@ -11,17 +14,24 @@ import { CodeSnippetService } from '../shared/services/code-snippet.service';
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent implements OnInit {
-  file: File | null = null;
-
-  response ?: HighlightAutoResult ;
-
   optimizationConfig: FormGroup;
+  response?: HighlightAutoResult;
+  file: FileAndSize | null = null;
 
-  constructor(private imageOptimizerService: ImageOptimizerService, public codeSnippetService: CodeSnippetService) {
-    this.optimizationConfig = imageOptimizerService.getOptimizationConfigForm();
+  zipId: string = '';
+  zipUrl: string = '';
+  zipName: string = '<IMAGE_NAME>';
+
+  imagePlaceholder: string = '<IMAGE_PLACEHOLDER>';
+
+  constructor(
+    private imageOptimizerService: ImageOptimizerService,
+    public codeSnippetService: CodeSnippetService
+  ) {
+    this.optimizationConfig = ImageOptimizerService.getOptimizationConfigForm();
   }
 
-  syncFile(file: File): void {
+  syncFile(file: FileAndSize): void {
     this.file = file;
   }
 
@@ -30,33 +40,53 @@ export class LandingPageComponent implements OnInit {
   onSubmit(event: Event): void {
     event.preventDefault();
 
-    let config = this.optimizationConfig.getRawValue() as OptimizationConfig;
-
     if (!this.file) return;
+
+    let config = ImageOptimizerService.processOptimizationConfigForm(
+      this.optimizationConfig.getRawValue() as OptimizationConfigForm
+    );
+
     this.imageOptimizerService
       .optimize(this.file, config)
-      .subscribe((data: any) => console.log(data));
-  }
+      .subscribe((event: any) => {
+        if (event.type === HttpEventType.DownloadProgress) {
+          console.log('download progress');
+        }
 
+        if (event.type === HttpEventType.Response) {
+          this.setZipId(event.body.data.id);
+          this.imagePlaceholder = event.body.data.placeholder;
+        }
+      });
+  }
 
   onHighlight(e: HighlightAutoResult) {
     this.response = {
       language: e.language,
       relevance: e.relevance,
       secondBest: '{...}',
-      value: '{...}'
-    }
+      value: '{...}',
+    };
   }
 
-  getCSS(){
+  setZipId(value: string) {
+    this.zipName = extractFileName(value);
+    this.zipUrl = `/static/${value}`;
+  }
+
+  getCSS() {
     return this.codeSnippetService.getCSS();
   }
 
-  getJavascript(){
+  getJavascript() {
     return this.codeSnippetService.getJavascript();
   }
 
-  getHTML(){
-    return this.codeSnippetService.getHTML();
+  getHTML() {
+    return this.codeSnippetService.getHTML({
+      placeholder: this.imagePlaceholder,
+      dimension: this.file?.dimension || { width: 0, height: 0 },
+      imagesURI: `/static/images/${this.zipName}`,
+    });
   }
 }

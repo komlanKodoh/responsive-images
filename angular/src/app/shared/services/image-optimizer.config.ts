@@ -3,18 +3,34 @@
 
 export interface OptimizationConfig {
     /**
-     * Wether to include a jpeg version of the image or not
+     * Wether to include a jpeg/webp/png version of the image or not
+     */
+    jpeg: boolean;
+    webp: boolean;
+    png: boolean;
+  
+    /**
+     * The file image sizes the optimizer should include
+     */
+  
+    sizes: (250 | 500 | 750 | 1000)[];
+  }
+  
+
+export interface OptimizationConfigForm {
+    /**
+     * Wether to include a jpeg/webp/png version of the image or not
      */
     jpeg: boolean,
-    /**
-     * Wether to include a webp version of the image or not
-     */
     webp: boolean,
+    png : boolean, 
 
     /**
-     * File name to give to the zip file when
-     * 
-     * > This name is also used in the path given in the code snippet
+     * The file image sizes the optimizer should include
      */
-    fileName: string
+
+    250: boolean,
+    500: boolean,
+    750: boolean,
+    1000 : boolean,
 }

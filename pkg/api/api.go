@@ -11,10 +11,15 @@ func New() Api {
 		router: gin.Default(),
 	}
 
+	// delete this 
+	api.router.GET("/", func(context *gin.Context){
+		context.JSON(200 ,gin.H{ "message": "bro , I am running "})	
+	})
+
 	// Mount error handler for centralized/ consistent error handling
 	api.Use(custom_error.NewHandler())
 
-	// Mount image service on path '<Root>/image'
+	// Mount image service on path '<Root>/api/image'
 	api.Mount(image.NewService(), "/image")
 
 	return api
