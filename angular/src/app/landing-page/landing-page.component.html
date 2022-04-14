@@ -9,7 +9,7 @@
 
 <div id="#upload" class="grid grid-cols-1 sm:grid-cols-2 max-w-screen-lg w-full m-auto gap-5">
 
-  <app-image-input class="bg-green-500 h-[200px]" (newImageEvent)="syncFile($event)"></app-image-input>
+  <app-image-input class="bg-gray-300" (newImageEvent)="syncFile($event)"></app-image-input>
 
   <form [formGroup]="optimizationConfig">
 
@@ -17,14 +17,27 @@
     <mat-checkbox formControlName="jpeg" class="block" color="primary"> Jpeg </mat-checkbox>
     <mat-checkbox formControlName="webp" class="block" color="primary"> WebP </mat-checkbox>
 
-    <mat-form-field formControlName="fileName" appearance="standard" class="block">
+    <mat-form-field appearance="standard" class="block">
       <!-- <mat-label>File name </mat-label> -->
       <input formControlName="fileName" matInput extension="Just name no file extension"
         matTooltip="Info about the action">
     </mat-form-field>
+
 
     <button mat-raised-button color="primary" (click)="onSubmit($event)"> Optimize </button>
 
   </form>
 
 </div>
+
+<mat-tab-group mat-align-tabs="start" class="block" dynamicHeight >
+  <mat-tab label="CSS">
+    <pre><code [highlight]="getCSS()"  [lineNumbers]="true" (highlighted)="onHighlight($event)" ></code></pre>
+  </mat-tab>
+  <mat-tab label="Javascript">
+    <pre><code [highlight]="getJavascript()"  [lineNumbers]="true" (highlighted)="onHighlight($event)" ></code></pre>
+  </mat-tab>
+  <mat-tab label="HTML">
+    <pre><code [highlight]="getHTML()"  [lineNumbers]="true" (highlighted)="onHighlight($event)" ></code></pre>
+  </mat-tab>
+</mat-tab-group>

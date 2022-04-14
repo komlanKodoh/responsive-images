@@ -10,8 +10,6 @@ export class ImageOptimizerService {
   constructor(private http: HttpClient) {}
 
   optimize(file: File, config?: OptimizationConfig) {
-    console.log(file, config);
-
     const formData = new FormData();
 
     formData.append('image', file);
@@ -22,7 +20,7 @@ export class ImageOptimizerService {
       formData.append('fileName', config.fileName);
     }
 
-    return this.http.post('/api/optimization', formData, {
+    return this.http.post('http://localhost/api/image/', formData, {
       observe: 'events',
       reportProgress: true,
       responseType: 'json',
