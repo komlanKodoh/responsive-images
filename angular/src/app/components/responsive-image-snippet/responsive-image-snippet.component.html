@@ -1,0 +1,61 @@
+<form class="m-auto my-7 max-w-lg" [formGroup]="snippetConfigForm">
+   
+    <h2>Code snippet</h2>
+
+    <mat-form-field class="w-full" appearance="fill">
+        <mat-label> Image URI </mat-label>
+        <input formControlName="imagesURI" matInput placeholder="Ex. Pizza" value="Sushi">
+    </mat-form-field>
+
+    <div class="w-full grid grid-cols-2 gap-1">
+        <!-- Default Image size -->
+        <mat-form-field class="w-full" appearance="fill">
+            <mat-label>Default image size</mat-label>
+            <mat-select formControlName="defaultImageSize" >
+                <mat-option value="250" > 250 px </mat-option>
+                <mat-option value="500"> 500 px </mat-option>
+                <mat-option value="700"> 750 px </mat-option>
+                <mat-option value="1000"> 1000 px </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!-- Default Image Format -->
+        <mat-form-field class="w-full" appearance="fill">
+            <mat-label>Default image format</mat-label>
+            <mat-select formControlName="defaultImageFormat">
+                <mat-option value="jpeg">jpeg</mat-option>
+                <mat-option value="webp">webp</mat-option>
+                <mat-option value="png">png</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </div>
+
+
+    <mat-form-field class="w-full" appearance="fill" >
+        <mat-label> image description </mat-label>
+        <input formControlName="description" matInput placeholder="Ex. Pizza" value="Sushi">
+    </mat-form-field>
+
+    <mat-form-field class="w-full" appearance="fill">
+        <mat-label> Image sizes </mat-label>
+        <input formControlName="imageSizes" matInput placeholder="Ex. Pizza" value="Sushi">
+    </mat-form-field>
+
+</form>
+
+<mat-tab-group class="mat-tab-body-wrapper" mat-align-tabs="center" class="max-w-screen-lg m-auto" dynamicHeight>
+    <mat-tab label="CSS">
+        <pre><code class="tab" [highlight]="getCSS()"  [lineNumbers]="true"></code></pre>
+    </mat-tab>
+    <mat-tab label="Javascript">
+        <pre><code class="tab" [highlight]="getJavascript()"  [lineNumbers]="true" ></code></pre>
+    </mat-tab>
+    <mat-tab label="HTML">
+        <pre><code class="tab" [highlight]="getHTML()"  [lineNumbers]="true"></code></pre>
+    </mat-tab>
+</mat-tab-group>
+
+<div class="m-auto py-8 w-fit ">
+    <p class=" text-sm ">Open source on <a class="text-blue-800" href="https://github.com/Behemoth11/responsive-images">Github</a> </p>
+</div>

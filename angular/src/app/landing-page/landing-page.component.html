@@ -1,7 +1,7 @@
 <div class=" relative max-w-screen-xl w-full m-auto py-28 text-center text-gray-900">
   <h1 class=" text-6xl tracking-wider font-extrabold">Responsive images made easy</h1>
   <span class=" text-xl leading-5 block"> Improve your load times and obtain amazing light house scores</span><br />
-  <a mat-raised-button color="primary" href="#upload">Get Started</a>
+  <a mat-raised-button color="primary" class=" my-8" href="#upload">Get Started</a>
 
   <div class="-z-20 absolute top-16 right-16 bg-amber-500 p-5 rounded-full dynamic-animated">
   </div>
@@ -20,10 +20,18 @@
 
         <section class="example-section">
           <h3>Choose image sizes </h3>
-          <p><mat-checkbox formControlName="250" name="image-sizes">250 px </mat-checkbox></p>
-          <p><mat-checkbox formControlName="500" name="image-sizes" >500 px </mat-checkbox></p>
-          <p><mat-checkbox formControlName="750"  name="image-sizes">750 px </mat-checkbox></p>
-          <p><mat-checkbox formControlName="1000"  name="image-sizes">1000 px </mat-checkbox></p>
+          <p>
+            <mat-checkbox formControlName="250" name="image-sizes">250 px </mat-checkbox>
+          </p>
+          <p>
+            <mat-checkbox formControlName="500" name="image-sizes">500 px </mat-checkbox>
+          </p>
+          <p>
+            <mat-checkbox formControlName="750" name="image-sizes">750 px </mat-checkbox>
+          </p>
+          <p>
+            <mat-checkbox formControlName="1000" name="image-sizes">1000 px </mat-checkbox>
+          </p>
         </section>
 
       </div>
@@ -32,9 +40,15 @@
 
         <section class="example-section">
           <h3>Choose image formats</h3>
-          <p><mat-checkbox formControlName="jpeg">jpeg</mat-checkbox></p>
-          <p><mat-checkbox formControlName="webp">webp</mat-checkbox></p>
-          <p><mat-checkbox formControlName="png">png</mat-checkbox></p>
+          <p>
+            <mat-checkbox formControlName="jpeg">jpeg</mat-checkbox>
+          </p>
+          <p>
+            <mat-checkbox formControlName="webp">webp</mat-checkbox>
+          </p>
+          <p>
+            <mat-checkbox formControlName="png">png</mat-checkbox>
+          </p>
         </section>
       </div>
 
@@ -47,42 +61,7 @@
   </form>
 </div>
 
-<a class="m-auto block mt-8 w-fit" mat-raised-button color="primary" [href]="zipUrl" [download]="zipName"
-  [disabled]="zipUrl"> Download optimized Image </a>
+<a class="m-auto block my-16 w-fit" mat-raised-button color="primary" [href]="zipUrl" [download]="zipName"
+  [disabled]="zipId === '' "> Download optimized Image </a>
 
-<mat-tab-group mat-align-tabs="start" class="max-w-screen-lg m-auto" dynamicHeight>
-  <mat-tab label="CSS">
-    <pre><code [highlight]="getCSS()"  [lineNumbers]="true" (highlighted)="onHighlight($event)" ></code></pre>
-  </mat-tab>
-  <mat-tab label="Javascript">
-    <pre><code [highlight]="getJavascript()"  [lineNumbers]="true" (highlighted)="onHighlight($event)" ></code></pre>
-  </mat-tab>
-  <mat-tab label="HTML">
-    <pre><code [highlight]="getHTML()"  [lineNumbers]="true" (highlighted)="onHighlight($event)" ></code></pre>
-  </mat-tab>
-</mat-tab-group>
-
-<div>
-  <!-- Default Image size -->
-  <p>Choose default image size</p>
-  <mat-form-field appearance="fill">
-    <mat-label>Default image size</mat-label>
-    <mat-select>
-      <mat-option value="250px">250 px </mat-option>
-      <mat-option value="500px">500 px </mat-option>
-      <mat-option value="700px">750 px </mat-option>
-      <mat-option value="1000px"> 1000 px </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <!-- Default Image Format -->
-  <p>Choose default image format</p>
-  <mat-form-field appearance="fill">
-    <mat-label>Default image format</mat-label>
-    <mat-select>
-      <mat-option value="jpeg">jpeg</mat-option>
-      <mat-option value="webp">webp</mat-option>
-      <mat-option value="png">png</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
+<app-responsive-image-snippet [SnippetData]="getSnippetData()"></app-responsive-image-snippet>

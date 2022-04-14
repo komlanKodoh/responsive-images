@@ -40,9 +40,14 @@ export class CodeSnippetService {
   }
 
   getHTML(config: {
-    placeholder: string;
-    dimension: { width: number; height: number };
     imagesURI: string;
+    folderName: string;
+    imageSizes: string;
+    placeholder: string;
+    description: string;
+    defaultImageSize: string;
+    defaultImageFormat: string;
+    dimension: { width: number; height: number };
   }) {
     return `
 <div class="opt-img">
@@ -50,19 +55,19 @@ export class CodeSnippetService {
 
   <picture>
     <source type="image/webp" sizes="100vw"
-        srcset="${config.imagesURI}/200.webp 200w,
-                ${config.imagesURI}/400.webp 400w
-                ${config.imagesURI}/400.webp 700w" >
+        srcset="${config.imagesURI}${config.folderName}/250.webp 200w,
+                ${config.imagesURI}${config.folderName}/500.webp 400w
+                ${config.imagesURI}${config.folderName}/750.webp 700w" >
 
-    <img style="opacity: 1;" sizes="100vw" decoding="async" loading="lazy"
+    <img style="opacity: 1;" sizes="${config.imageSizes}" decoding="async" loading="lazy"
         onLoad="onOptImgLoad"
-        alt="view it search preview"
-        src="${config.imagesURI}/200.png"
+        alt="${config.description}"
+        src="${config.imagesURI}${config.folderName}/${config.defaultImageSize}.${config.defaultImageFormat}"
         width="${config.dimension.width}"
         height="${config.dimension.height}"
-        srcset="${config.imagesURI}/200.jpeg 200w,
-                ${config.imagesURI}/400.jpeg 400w
-                ${config.imagesURI}/400.jpeg 700w">
+        srcset="${config.imagesURI}${config.folderName}/250.jpeg 200w,
+                ${config.imagesURI}${config.folderName}/500.jpeg 400w
+                ${config.imagesURI}${config.folderName}/750.jpeg 700w">
   </picture>      
 
 </div>

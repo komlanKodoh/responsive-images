@@ -16,7 +16,6 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"sync"
 	"time"
 )
 
@@ -77,18 +76,18 @@ func handlePost(context *gin.Context) {
 		return
 	}
 
-	var waitGroup sync.WaitGroup
-	waitGroup.Add(len(sizes))
+	//var waitGroup sync.WaitGroup
+	//waitGroup.Add(len(sizes))
 
 	for _, size := range sizes {
-		go func() {
-			defer waitGroup.Done()
-			// adding a 200px version to zip
-			zipImageVersion(zipWriter, originalImage, size, config)
-		}()
+		//go func() {
+		//defer waitGroup.Done()
+		// adding a 200px version to zip
+		zipImageVersion(zipWriter, originalImage, size, config)
+		//}()
 	}
 
-	waitGroup.Wait()
+	//waitGroup.Wait()
 	var errZip = zipWriter.Close()
 	if errZip != nil {
 		fmt.Println(err)
@@ -96,7 +95,7 @@ func handlePost(context *gin.Context) {
 
 	id, _ := genId()
 	fileName := fileNameWithoutExtSliceNotation(header.Filename) + "-" + id + ".zip"
-	filePath := "./static/" + fileName
+	filePath := "./static/storage/" + fileName
 	ioutil.WriteFile(filePath, zipBuffer.Bytes(), 0777)
 
 	responseData := gin.H{"id": fileName, "placeholder": getImageBase64(originalImage, config.PlaceholderWidth)}

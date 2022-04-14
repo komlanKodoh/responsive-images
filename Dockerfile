@@ -5,9 +5,11 @@ COPY ./api /
 COPY ./run.sh /
 
 RUN apt update
+RUN cd  /etc/nginx/sites-enabled/ && rm default
 
-RUN rm /etc/nginx/nginx.config
 COPY ./nginx.conf /etc/nginx/sites-enabled/
+
+COPY ./static /static
 
 
 ENTRYPOINT ["/run.sh"]

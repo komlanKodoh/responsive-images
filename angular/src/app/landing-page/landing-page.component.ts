@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HighlightAutoResult } from 'ngx-highlightjs';
-import {  FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ImageOptimizerService } from '../shared/services/image-optimizer.service';
 import { CodeSnippetService } from '../shared/services/code-snippet.service';
 import { FileAndSize } from '../shared/components/image-input/image-input.component';
 import { HttpEventType } from '@angular/common/http';
-import {  OptimizationConfigForm } from '../shared/services/image-optimizer.config';
+import { OptimizationConfigForm } from '../shared/services/image-optimizer.config';
 import { extractFileName } from 'src/utils';
 
 @Component({
@@ -30,8 +30,6 @@ export class LandingPageComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.optimizationConfig = ImageOptimizerService.getOptimizationConfigForm();
-
-    
   }
 
   syncFile(file: FileAndSize): void {
@@ -42,6 +40,7 @@ export class LandingPageComponent implements OnInit {
 
   onSubmit(event: Event): void {
     event.preventDefault();
+    this.setZipId('');
 
     if (!this.file) return;
 
@@ -73,23 +72,16 @@ export class LandingPageComponent implements OnInit {
   }
 
   setZipId(value: string) {
+    this.zipId = value;
+    this.zipUrl = `/storage/${value}`;
     this.zipName = extractFileName(value);
-    this.zipUrl = `/static/${value}`;
   }
 
-  getCSS() {
-    return this.codeSnippetService.getCSS();
-  }
-
-  getJavascript() {
-    return this.codeSnippetService.getJavascript();
-  }
-
-  getHTML() {
-    return this.codeSnippetService.getHTML({
+  getSnippetData() {
+    return {
       placeholder: this.imagePlaceholder,
       dimension: this.file?.dimension || { width: 0, height: 0 },
-      imagesURI: `/static/images/${this.zipName}`,
-    });
+      folderName: this.zipName,
+    };
   }
 }

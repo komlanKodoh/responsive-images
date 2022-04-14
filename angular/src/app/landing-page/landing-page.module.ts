@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { LandingPageComponent } from './landing-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ResponsiveImageSnippetModule } from '../components/responsive-image-snippet/responsive-image-snippet.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     CommonModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ResponsiveImageSnippetModule
   ]
 })
 export class LandingPageModule { }

@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "scully": "npx scully --",
+    "scully:serve": "npx scully serve --"
   },
   "private": true,
   "dependencies": {
@@ -19,7 +21,13 @@
     "@angular/material": "~13.3.2",
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
+    "@angular/platform-server": "^12",
     "@angular/router": "~13.3.0",
+    "@scullyio/init": "^2.1.29",
+    "@scullyio/ng-lib": "^2.1.0",
+    "@scullyio/platform-server": "^2.1.0",
+    "@scullyio/scully": "^2.1.0",
+    "@scullyio/scully-plugin-puppeteer": "^2.1.29",
     "highlightjs-line-numbers.js": "^2.8.0",
     "ngx-highlightjs": "^6.1.2",
     "rxjs": "~7.5.0",
