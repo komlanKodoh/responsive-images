@@ -17,6 +17,7 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -68,21 +69,24 @@ func handlePost(context *gin.Context) {
 	}
 
 	zipWriter := zip.NewWriter(zipBuffer)
+	sizes := strings.Split(config.Sizes, ",")
 
-	println(config.Sizes)
-	for _, strSize := range strings.Split(config.Sizes, ",") {
+	var waitGroup sync.WaitGroup
+	waitGroup.Add(len(sizes))
 
-		println(strSize)
+	for _, strSize := range sizes {
+		go func() {
+			defer waitGroup.Done()
 
-		size, err := strconv.Atoi(strSize)
+			size, err := strconv.Atoi(strSize)
+			if err != nil {
+				context.Error(custom_error.BadRequestError("One or more of the sizes you provided is not an integer"))
+				return
+			}
 
-		if err != nil {
-			context.Error(custom_error.BadRequestError("One or more of the sizes you provided is not an integer"))
-			return
-		}
-
-		// adding a 200px version to zip
-		zipImageVersion(zipWriter, originalImage, size, config)
+			// adding a 200px version to zip
+			zipImageVersion(zipWriter, originalImage, size, config)
+		}()
 	}
 
 	var errZip = zipWriter.Close()
