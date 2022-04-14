@@ -4,6 +4,7 @@ import (
 	"archive/zip"
 	"bytes"
 	"encoding/base64"
+	"encoding/json"
 	"fmt"
 	"github.com/Behemoth11/awaken-email-service/pkg/api/custom_error"
 	"github.com/Behemoth11/awaken-email-service/pkg/api/image/manipulations"
@@ -15,8 +16,6 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"strconv"
-	"strings"
 	"sync"
 	"time"
 )
@@ -42,7 +41,7 @@ type optimizerConfig struct {
 	Webp bool `form:"webp"`
 	Png  bool `form:"png"`
 
-	Sizes string `form:"sizes"`
+	Sizes []string `form:"sizes"`
 
 	PlaceholderWidth int `form:"placeholder-width,default=35"`
 }
@@ -69,26 +68,27 @@ func handlePost(context *gin.Context) {
 	}
 
 	zipWriter := zip.NewWriter(zipBuffer)
-	sizes := strings.Split(config.Sizes, ",")
+
+	var sizes []int
+	_ = json.Unmarshal([]byte(config.Sizes[0]), &sizes)
+
+	if err != nil {
+		context.Error(custom_error.BadRequestError("One or more of the sizes you provided is not an integer"))
+		return
+	}
 
 	var waitGroup sync.WaitGroup
 	waitGroup.Add(len(sizes))
 
-	for _, strSize := range sizes {
+	for _, size := range sizes {
 		go func() {
 			defer waitGroup.Done()
-
-			size, err := strconv.Atoi(strSize)
-			if err != nil {
-				context.Error(custom_error.BadRequestError("One or more of the sizes you provided is not an integer"))
-				return
-			}
-
 			// adding a 200px version to zip
 			zipImageVersion(zipWriter, originalImage, size, config)
 		}()
 	}
 
+	waitGroup.Wait()
 	var errZip = zipWriter.Close()
 	if errZip != nil {
 		fmt.Println(err)

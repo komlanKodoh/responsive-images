@@ -7,33 +7,50 @@
   </div>
 </div>
 
-<div id="#upload" class="grid grid-cols-1 sm:grid-cols-2 max-w-screen-lg w-full m-auto gap-5">
+<div id="#upload" class="grid grid-cols-1 md:grid-cols-2 max-w-screen-lg w-full m-auto gap-5">
 
   <app-image-input class="bg-gray-300" (newImageEvent)="syncFile($event)"></app-image-input>
 
 
-  <form [formGroup]="optimizationConfig">
+  <form [formGroup]="optimizationConfig" class="flex flex-col justify-between py-2">
 
-    <p> Choose image formats </p>
-    <mat-checkbox formControlName="jpeg" class="block" color="primary"> Jpeg </mat-checkbox>
-    <mat-checkbox formControlName="webp" class="block" color="primary"> WebP </mat-checkbox>
+    <div class="grid grid-cols-2 gap-2">
+      <!-- Image formats  -->
+      <div>
 
-    <mat-form-field appearance="standard" class="block">
-      <!-- <mat-label>File name </mat-label> -->
-      <input formControlName="fileName" matInput extension="Just name no file extension"
-        matTooltip="Info about the action">
-    </mat-form-field>
+        <section class="example-section">
+          <h3>Choose image sizes </h3>
+          <p><mat-checkbox formControlName="250" name="image-sizes">250 px </mat-checkbox></p>
+          <p><mat-checkbox formControlName="500" name="image-sizes" >500 px </mat-checkbox></p>
+          <p><mat-checkbox formControlName="750"  name="image-sizes">750 px </mat-checkbox></p>
+          <p><mat-checkbox formControlName="1000"  name="image-sizes">1000 px </mat-checkbox></p>
+        </section>
 
+      </div>
 
-    <button mat-raised-button color="primary" (click)="onSubmit($event)"> Optimize </button>
+      <div>
+
+        <section class="example-section">
+          <h3>Choose image formats</h3>
+          <p><mat-checkbox formControlName="jpeg">jpeg</mat-checkbox></p>
+          <p><mat-checkbox formControlName="webp">webp</mat-checkbox></p>
+          <p><mat-checkbox formControlName="png">png</mat-checkbox></p>
+        </section>
+      </div>
+
+    </div>
+
+    <button class="w-fit mx-auto" mat-raised-button color="primary" (click)="onSubmit($event)"
+      [disabled]="file === null"> Optimize
+    </button>
 
   </form>
-
-  <a mat-raised-button color="primary" [href]="zipUrl" [download]="zipName"> Download optimizeImage </a>
-
 </div>
 
-<mat-tab-group mat-align-tabs="start" class="max-w-screen-lg m-auto" dynamicHeight >
+<a class="m-auto block mt-8 w-fit" mat-raised-button color="primary" [href]="zipUrl" [download]="zipName"
+  [disabled]="zipUrl"> Download optimized Image </a>
+
+<mat-tab-group mat-align-tabs="start" class="max-w-screen-lg m-auto" dynamicHeight>
   <mat-tab label="CSS">
     <pre><code [highlight]="getCSS()"  [lineNumbers]="true" (highlighted)="onHighlight($event)" ></code></pre>
   </mat-tab>
@@ -44,3 +61,28 @@
     <pre><code [highlight]="getHTML()"  [lineNumbers]="true" (highlighted)="onHighlight($event)" ></code></pre>
   </mat-tab>
 </mat-tab-group>
+
+<div>
+  <!-- Default Image size -->
+  <p>Choose default image size</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Default image size</mat-label>
+    <mat-select>
+      <mat-option value="250px">250 px </mat-option>
+      <mat-option value="500px">500 px </mat-option>
+      <mat-option value="700px">750 px </mat-option>
+      <mat-option value="1000px"> 1000 px </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Default Image Format -->
+  <p>Choose default image format</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Default image format</mat-label>
+    <mat-select>
+      <mat-option value="jpeg">jpeg</mat-option>
+      <mat-option value="webp">webp</mat-option>
+      <mat-option value="png">png</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

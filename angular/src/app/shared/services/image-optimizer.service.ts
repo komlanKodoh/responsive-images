@@ -50,12 +50,6 @@ export class ImageOptimizerService {
       500: new FormControl(false),
       750: new FormControl(false),
       1000: new FormControl(false),
-
-      // name of the zip file
-      fileName: new FormControl('File name'),
-
-      // root uri where folder will be located
-      root: new FormControl('/static/images'),
     });
   }
 

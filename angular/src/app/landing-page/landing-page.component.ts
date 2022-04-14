@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HighlightAutoResult } from 'ngx-highlightjs';
-import {  FormGroup } from '@angular/forms';
+import {  FormBuilder, FormGroup } from '@angular/forms';
 import { ImageOptimizerService } from '../shared/services/image-optimizer.service';
 import { CodeSnippetService } from '../shared/services/code-snippet.service';
 import { FileAndSize } from '../shared/components/image-input/image-input.component';
@@ -26,9 +26,12 @@ export class LandingPageComponent implements OnInit {
 
   constructor(
     private imageOptimizerService: ImageOptimizerService,
-    public codeSnippetService: CodeSnippetService
+    public codeSnippetService: CodeSnippetService,
+    private formBuilder: FormBuilder
   ) {
     this.optimizationConfig = ImageOptimizerService.getOptimizationConfigForm();
+
+    
   }
 
   syncFile(file: FileAndSize): void {
