@@ -5,28 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ef4bccb-fc2d-4da0-8c78-9ccf5e6a7317" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/angular/scully.angular.config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/scully/plugins/plugin.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/scully/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/src/app/components/components.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/src/app/components/responsive-image-snippet/responsive-image-snippet.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/src/app/components/responsive-image-snippet/responsive-image-snippet.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/src/app/components/responsive-image-snippet/responsive-image-snippet.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/src/app/components/responsive-image-snippet/responsive-image-snippet.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/src/app/components/responsive-image-snippet/responsive-image-snippet.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/angular/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/angular/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/angular/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angular/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular/src/app/landing-page/landing-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular/src/app/landing-page/landing-page.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular/src/app/landing-page/landing-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angular/src/app/landing-page/landing-page.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular/src/app/landing-page/landing-page.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angular/src/app/landing-page/landing-page.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular/src/app/shared/services/code-snippet.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angular/src/app/shared/services/code-snippet.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular/src/polyfills.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angular/src/polyfills.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/api/image/image.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/api/image/image.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

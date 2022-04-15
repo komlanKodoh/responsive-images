@@ -24,7 +24,7 @@ export class ImageOptimizerService {
       formData.append('sizes', JSON.stringify(config.sizes));
     }
 
-    return this.http.post('http://localhost/api/image/', formData, {
+    return this.http.post('/api/image/', formData, {
       observe: 'events',
       reportProgress: true,
       responseType: 'json',
