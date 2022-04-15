@@ -5,7 +5,10 @@ import { ImageOptimizerService } from '../shared/services/image-optimizer.servic
 import { CodeSnippetService } from '../shared/services/code-snippet.service';
 import { FileAndSize } from '../shared/components/image-input/image-input.component';
 import { HttpEventType } from '@angular/common/http';
-import { OptimizationConfigForm } from '../shared/services/image-optimizer.config';
+import {
+  OptimizationConfig,
+  OptimizationConfigForm,
+} from '../shared/services/image-optimizer.types';
 import { extractFileName } from 'src/utils';
 
 @Component({
@@ -21,6 +24,8 @@ export class LandingPageComponent implements OnInit {
   zipId: string = '';
   zipUrl: string = '';
   zipName: string = '<IMAGE_NAME>';
+
+  currentOptimizationConfig?: OptimizationConfig;
 
   imagePlaceholder: string = '<IMAGE_PLACEHOLDER>';
 
@@ -57,6 +62,8 @@ export class LandingPageComponent implements OnInit {
 
         if (event.type === HttpEventType.Response) {
           this.setZipId(event.body.data.id);
+
+          this.currentOptimizationConfig = config;
           this.imagePlaceholder = event.body.data.placeholder;
         }
       });
@@ -78,10 +85,13 @@ export class LandingPageComponent implements OnInit {
   }
 
   getSnippetData() {
+    
     return {
       placeholder: this.imagePlaceholder,
       dimension: this.file?.dimension || { width: 0, height: 0 },
       folderName: this.zipName,
+      availableImageSizes: this.currentOptimizationConfig?.sizes || [],
+      availableImageFormat: this.currentOptimizationConfig || {}
     };
   }
 }

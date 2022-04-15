@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CodeSnippetService } from 'src/app/shared/services/code-snippet.service';
+import { ImageFormat, ImageSizes } from 'src/app/shared/services/image-optimizer.types';
 
 @Component({
   selector: 'app-responsive-image-snippet',
@@ -8,7 +9,7 @@ import { CodeSnippetService } from 'src/app/shared/services/code-snippet.service
   styleUrls: ['./responsive-image-snippet.component.scss'],
 })
 export class ResponsiveImageSnippetComponent implements OnInit {
-  @Input() SnippetData!: SnippetData;
+  @Input() snippetData!: SnippetData;
 
   snippetConfigForm: FormGroup;
   constructor(
@@ -36,15 +37,50 @@ export class ResponsiveImageSnippetComponent implements OnInit {
 
   getHTML() {
     return this.codeSnippetService.getHTML({
-      ...this.SnippetData,
+      ...this.snippetData,
       ...this.snippetConfigForm.value,
     });
+  }
+
+  /**
+   * Tells if an image can be included in the snippet
+   */
+
+  formatIsAvailable(format : ImageFormat) : boolean {
+    return this.snippetData.availableImageFormat[format] || false;
+  }
+
+  imageSizeIsAvailable(size : ImageSizes) {
+    return this.snippetData.availableImageSizes.includes(size);
   }
 }
 
 interface SnippetData {
+  /**
+   * Base 64 version of the image ( serves as a preview if the image has not yet loaded )
+   */
   placeholder: string;
+
+  /**
+   * image width and height ( used to prevent cumulative layout shifts)
+   */
   dimension: { width: number; height: number };
+
+  /**
+   * The name of the folder in which  the images are stored. 
+   * If not changed, this will correspond to the name of the zip archive
+   */
   folderName: string;
+
+
+  /**
+   * A list of all the image format that the user has selected
+   */
+  availableImageFormat: {[K in ImageFormat]?: boolean};
+
+  /**
+   * A list of all the image sizes that the user has selected
+   */
+  availableImageSizes: ImageSizes[]
 }
 

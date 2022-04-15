@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { OptimizationConfig, OptimizationConfigForm } from './image-optimizer.config';
+import { OptimizationConfig, OptimizationConfigForm } from './image-optimizer.types';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -61,7 +61,7 @@ export class ImageOptimizerService {
 
     let config = {...form, sizes: [] } as OptimizationConfig;
 
-    ([250,500,750,1000] as const).forEach(size => {
+    (["250","500","750","1000"] as const).forEach(size => {
       if ( form[size] ) config.sizes.push(size);
     })
 
