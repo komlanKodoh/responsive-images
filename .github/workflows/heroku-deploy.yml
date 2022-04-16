@@ -65,5 +65,7 @@ jobs:
           HEROKU_AUTH_TOKEN: ${{ secrets.HEROKU_AUTH_TOKEN }}
 
       - name : Docker push to heroku repository
-        run : docker tag responsive-images registry.heroku.com/easy-responsive-images/web
-        run : docker push registry.heroku.com/easy-responsive-images/web
+        run : |
+         docker tag responsive-images registry.heroku.com/easy-responsive-images/web && 
+         docker push registry.heroku.com/easy-responsive-images/web
+ 
