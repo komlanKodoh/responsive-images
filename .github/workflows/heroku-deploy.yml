@@ -31,13 +31,16 @@ jobs:
           HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
 
       - name: Build go server
-        run: |
-          go build ./cmd/api
-      
+        uses: actions/setup-go@v3
+        with:
+          go-version: "^1.13.8"
+
+        run: go build ./cmd/api
+
       - name: Build angular app
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: "14"
 
         run: |
           npm i &&
@@ -46,4 +49,20 @@ jobs:
           npx scully && 
           cd ../
 
+      - name: Deploy app to Heroku server
+        run: |
+          heroku container:push web &&
+          heroku container:release web &&
+          heroku logs --tail
 
+      - name : Build Docker image
+        run : docker build . -t responsive-images
+
+      - name : Docker heroku connection
+        run : docker login --username=_ --password=$HEROKU_AUTH_TOKEN registry.heroku.com
+        env:
+          HEROKU_AUTH_TOKEN: ${{ secrets.HEROKU_AUTH_TOKEN }}
+
+      - name : Docker push to heroku repository
+        run : docker tag responsive-images registry.heroku.com/easy-responsive-images/web
+        run : docker push registry.heroku.com/easy-responsive-images/web
