@@ -27,28 +27,30 @@ jobs:
       - name: Heroku login credentials
         run: |
           cat > ~/.netrc <<EOF
-machine api.heroku.com
-  login $HEROKU_EMAIL
-  password $HEROKU_API_KEY
-machine git.heroku.com
-  login $HEROKU_EMAIL
-  password $HEROKU_API_KEY
+              machine api.heroku.com
+                login $HEROKU_EMAIL
+                password $HEROKU_API_KEY
+              machine git.heroku.com
+                login $HEROKU_EMAIL
+                password $HEROKU_API_KEY
 
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
           HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
       
+      - name : Test credentials
+        run : cat ~/.netrc
 
       - name: Build go server
         run: go build ./cmd/api
 
-      - name: Build angular app
-        run: |
-          cd angular && 
-          npm i && 
-          npx ng build &&
-          npx scully && 
-          cd ../
+      # - name: Build angular app
+      #   run: |
+      #     cd angular && 
+      #     npm i && 
+      #     npx ng build &&
+      #     npx scully && 
+      #     cd ../
 
       - name : Build Docker image
         run : docker build . -t responsive-images
