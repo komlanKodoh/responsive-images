@@ -50,16 +50,7 @@ jobs:
           npx scully && 
           cd ../
 
-      - name : Build Docker image
-        run : docker build . -t responsive-images
-
-      - name : Docker heroku connection
-        run : docker login --username=_ --password=$HEROKU_AUTH_TOKEN registry.heroku.com
-        env:
-          HEROKU_AUTH_TOKEN: ${{ secrets.HEROKU_AUTH_TOKEN }}
-
-      - name : Docker push to heroku repository
-        run : |
-         docker tag responsive-images registry.heroku.com/easy-responsive-images/web && 
-         docker push registry.heroku.com/easy-responsive-images/web
- 
+      - name: Deploy app to Heroku server
+        run: |
+          heroku container:push web --app easy-responsive-images &&
+          heroku container:release web --app easy-responsive-images
