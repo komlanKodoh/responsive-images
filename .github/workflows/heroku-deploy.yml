@@ -10,6 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       # Check-out your repository.
       - name: Checkout
@@ -21,12 +22,28 @@ jobs:
             machine api.heroku.com
               login $HEROKU_EMAIL
               password $HEROKU_API_KEY
+            machine git.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
           HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
 
-      - name: Deploy application
+      - name: Build go server
         run: |
-          ./deploy.sh
+          go build ./cmd/api
+      
+      - name: Build angular app
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
 
-        shell: bash
+        run: |
+          npm i &&
+          cd angular && 
+          ng build &&
+          npx scully && 
+          cd ../
+
+
