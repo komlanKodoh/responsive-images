@@ -52,6 +52,23 @@ jobs:
 
       - name: Deploy app to Heroku server
         run: |
-          heroku container:login &&
-          heroku container:push web --app easy-responsive-images &&
-          heroku container:release web --app easy-responsive-images
+          heroku container:push web &&
+          heroku container:release web &&
+          heroku logs --tail
+
+      - name : Build Docker image
+        run : docker build . -t responsive-images
+
+      - name : Docker push to heroku repository
+        
+        run : |
+         docker login --username=_ --password=$HEROKU_AUTH_TOKEN registry.heroku.com &&
+         docker tag responsive-images registry.heroku.com/easy-responsive-images/web && 
+         docker push registry.heroku.com/easy-responsive-images/web
+        
+        env:
+          HEROKU_AUTH_TOKEN: ${{ secrets.HEROKU_AUTH_TOKEN }}
+
+      - name : Heroku update running container
+        run: heroku container:release web --app easy-responsive-images
+ 
