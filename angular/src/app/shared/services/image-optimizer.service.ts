@@ -22,6 +22,9 @@ export class ImageOptimizerService {
 
       // image sizes
       formData.append('sizes', JSON.stringify(config.sizes));
+
+      // placeholder base64 width
+      formData.append('placeholderWidth', JSON.stringify(config.placeholderWidth));
     }
 
     return this.http.post('/api/image/', formData, {
@@ -50,6 +53,9 @@ export class ImageOptimizerService {
       500: new FormControl(false),
       750: new FormControl(false),
       1000: new FormControl(false),
+
+      //The width of the place holder
+      placeholderWidth: new FormControl(35)
     });
   }
 
@@ -61,7 +67,7 @@ export class ImageOptimizerService {
 
     let config = {...form, sizes: [] } as OptimizationConfig;
 
-    (["250","500","750","1000"] as const).forEach(size => {
+    ([250,500,750,1000] as const).forEach(size => {
       if ( form[size] ) config.sizes.push(size);
     })
 

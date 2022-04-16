@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { ImageInputComponent } from './image-input/image-input.component';
+import { NumberInputComponent } from './number-input/number-input.component';
 
 
 
 @NgModule({
   declarations: [
-    ImageInputComponent
+    ImageInputComponent,
+    NumberInputComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +18,8 @@ import { ImageInputComponent } from './image-input/image-input.component';
     ReactiveFormsModule,
   ],
   exports : [
-    ImageInputComponent
+    ImageInputComponent,
+    NumberInputComponent
   ]
 })
 export class ComponentsModule { }

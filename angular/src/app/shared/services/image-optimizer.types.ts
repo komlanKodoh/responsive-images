@@ -13,7 +13,8 @@ export interface OptimizationConfig {
      * The file image sizes the optimizer should include
      */
   
-    sizes: ImageSizes[];
+    sizes: ImageSize[];
+    placeholderWidth: number
   }
   
 
@@ -33,8 +34,10 @@ export interface OptimizationConfigForm {
     500: boolean,
     750: boolean,
     1000 : boolean,
+
+    placeholderWidth: number
 }
 
 
 export type ImageFormat = 'jpeg' | 'png' | 'webp';
-export type ImageSizes = '250' | '500' | '750' | '1000';
+export type ImageSize = 250 | 500 | 750 | 1000;
