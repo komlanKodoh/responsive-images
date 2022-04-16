@@ -50,12 +50,6 @@ jobs:
           npx scully && 
           cd ../
 
-      - name: Deploy app to Heroku server
-        run: |
-          heroku container:push web &&
-          heroku container:release web &&
-          heroku logs --tail
-
       - name : Build Docker image
         run : docker build . -t responsive-images
 
