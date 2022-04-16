@@ -24,7 +24,7 @@ export class ImageOptimizerService {
       formData.append('sizes', JSON.stringify(config.sizes));
 
       // placeholder base64 width
-      formData.append('placeholderWidth', JSON.stringify(config.placeholderWidth));
+      formData.append('placeholder-width', JSON.stringify(config.placeholderWidth));
     }
 
     return this.http.post('/api/image/', formData, {
