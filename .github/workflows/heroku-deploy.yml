@@ -40,6 +40,8 @@ jobs:
       
       - name : Heroku Login 
         run : |
+          npm uninstall -g heroku-cli &&
+          npm i heroku &&
           sudo heroku login && 
           sudo heroku container:login
 
