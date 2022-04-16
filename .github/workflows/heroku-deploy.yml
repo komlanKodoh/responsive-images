@@ -16,6 +16,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - uses: actions/setup-go@v3
+        with:
+          go-version: "^1.13.8"
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "14"
+
       - name: Heroku login credentials
         run: |
           cat > ~/.netrc <<EOF
@@ -29,19 +37,12 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
           HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+      
 
       - name: Build go server
-        uses: actions/setup-go@v3
-        with:
-          go-version: "^1.13.8"
-
         run: go build ./cmd/api
 
       - name: Build angular app
-        uses: actions/setup-node@v3
-        with:
-          node-version: "14"
-
         run: |
           npm i &&
           cd angular && 
