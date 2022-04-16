@@ -44,13 +44,13 @@ jobs:
       - name: Build go server
         run: go build ./cmd/api
 
-      # - name: Build angular app
-      #   run: |
-      #     cd angular && 
-      #     npm i && 
-      #     npx ng build &&
-      #     npx scully && 
-      #     cd ../
+      - name: Build angular app
+        run: |
+          cd angular && 
+          npm i && 
+          npx ng build &&
+          npx scully && 
+          cd ../
 
       - name : Build Docker image
         run : docker build . -t responsive-images
