@@ -16,5 +16,5 @@ COPY ./nginx.conf /etc/nginx/nginx.conf
 COPY ./responsive-images.conf /etc/nginx/conf.d/
 
 
-ENTRYPOINT [ "/run.sh" ]
+# ENTRYPOINT [ "/run.sh" ]
 CMD /run.sh

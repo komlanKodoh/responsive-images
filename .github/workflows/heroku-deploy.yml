@@ -52,5 +52,6 @@ jobs:
 
       - name: Deploy app to Heroku server
         run: |
+          heroku container:login &&
           heroku container:push web --app easy-responsive-images &&
           heroku container:release web --app easy-responsive-images
