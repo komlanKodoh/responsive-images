@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../material/material.module';
 import { ImageInputComponent } from './image-input/image-input.component';
 
 
@@ -11,7 +12,8 @@ import { ImageInputComponent } from './image-input/image-input.component';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    MaterialModule,
+    ReactiveFormsModule,
   ],
   exports : [
     ImageInputComponent

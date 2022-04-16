@@ -38,11 +38,11 @@ jobs:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
           HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
       
-      - name : Heroku Login 
-        run : |
-          npm uninstall -g heroku-cli &&
-          npm i heroku &&
-          sudo heroku container:login
+      # - name : Heroku Login 
+      #   run : |
+      #     npm uninstall -g heroku-cli &&
+      #     npm i heroku &&
+      #     sudo heroku container:login
 
       - name: Build go server
         run: go build ./cmd/api
@@ -68,6 +68,6 @@ jobs:
         env:
           HEROKU_AUTH_TOKEN: ${{ secrets.HEROKU_AUTH_TOKEN }}
 
-      - name : Heroku update running container
-        run: heroku container:release web --app easy-responsive-images
+      # - name : Heroku update running container
+      #   run: heroku container:release web --app easy-responsive-images
  

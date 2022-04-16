@@ -1,7 +1,10 @@
-
-
 <img [ngClass]="size.width >= size.height && 'w-full absolute-center' || 'h-full absolute-center' "
-[src]="preview"><img>
+    [src]="preview"><img>
 
-<input class="z-10 relative block w-full h-full opacity-0" id="image" accept="image/*" type="file" [formControl]="image"
-(change)="syncImage($event)">
+<div [ngClass]="(size.width >= size.height && 'w-full absolute-center' || 'h-full absolute-center') + ' flex flex-col w-fit px-5 py-2 rounded shadow-md bg-white/20 backdrop-blur-lg' ">
+    <p class="w-fit m-auto">Drag and drop or</p> <br/>
+    <button mat-stroked-button color="warm" class="w-fit m-auto text-green-700"> Upload </button>
+</div>
+
+<input class="z-10 relative block w-full h-full opacity-0" id="image" accept="image/png,image/jpeg,image/jpg" type="file" [formControl]="image"
+    (change)="syncImage($event)">

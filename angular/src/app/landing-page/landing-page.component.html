@@ -9,7 +9,7 @@
 
 <div id="#upload" class="grid grid-cols-1 md:grid-cols-2 max-w-screen-lg w-full m-auto gap-5">
 
-  <app-image-input class="bg-gray-300" (newImageEvent)="syncFile($event)"></app-image-input>
+  <app-image-input class="bg-white text-lg shadow-all rounded " (newImageEvent)="syncFile($event)"></app-image-input>
 
 
   <form [formGroup]="optimizationConfig" class="flex flex-col justify-between py-2">
@@ -64,4 +64,6 @@
 <a class="m-auto block my-16 w-fit" mat-raised-button color="primary" [href]="zipUrl" [download]="zipName"
   [disabled]="zipId === '' "> Download optimized Image </a>
 
-<app-responsive-image-snippet [snippetData]="getSnippetData()"> </app-responsive-image-snippet>
+<div class=" w-full max-w-2xl m-auto">
+  <app-responsive-image-snippet [snippetData]="getSnippetData()"> </app-responsive-image-snippet>
+</div>
