@@ -98,7 +98,12 @@ func handlePost(context *gin.Context) {
 	filePath := "./static/storage/" + fileName
 	ioutil.WriteFile(filePath, zipBuffer.Bytes(), 0777)
 
-	responseData := gin.H{"id": fileName, "placeholder": getImageBase64(originalImage, config.PlaceholderWidth)}
+	var placeholder string
+	if config.PlaceholderWidth > 0 {
+		placeholder = getImageBase64(originalImage, config.PlaceholderWidth)
+	}
+
+	responseData := gin.H{"id": fileName, "placeholder": placeholder}
 
 	context.JSON(200, utils.WrapResponse(responseData))
 
