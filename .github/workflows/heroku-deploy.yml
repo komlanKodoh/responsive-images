@@ -45,8 +45,8 @@ jobs:
       - name: Build angular app
         run: |
           cd angular && 
-          npm i &&
-          ng build &&
+          npm i && 
+          npx ng build &&
           npx scully && 
           cd ../
 
