@@ -99,7 +99,7 @@ func handlePost(context *gin.Context) {
 	ioutil.WriteFile(filePath, zipBuffer.Bytes(), 0777)
 
 	var placeholder string
-	if config.PlaceholderWidth > 0 {
+	if config.PlaceholderWidth > 0 && config.PlaceholderWidth < 250 {
 		placeholder = getImageBase64(originalImage, config.PlaceholderWidth)
 	}
 
