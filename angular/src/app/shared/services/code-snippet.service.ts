@@ -42,6 +42,21 @@ export class CodeSnippetService {
   }
 
   getHTML(config: codeSnippetConfig) {
+    if (!config.placeholder) {
+      return `<picture>
+      ${config.availableImageFormat
+        .filter((format) => format !== config.defaultImageFormat)
+        .map((format) =>
+          this.getPictureSourceTag({
+            format,
+            pathName: config.imagesURI + config.folderName,
+            availableSizes: config.availableImageSizes,
+          })
+        )
+        .join('\n    ')}
+      ${this.getDefaultImageTag(config)}
+</picture>`;
+    }
     return `
 <div class="opt-img">
   <img src="${config.placeholder}"  decoding="async" />
@@ -58,8 +73,7 @@ export class CodeSnippetService {
       .join('\n    ')}
     ${this.getDefaultImageTag(config)}
   </picture>      
-</div>
-    `;
+</div>`;
   }
 
   getDefaultImageTag(config: codeSnippetConfig) {
@@ -68,16 +82,16 @@ export class CodeSnippetService {
     }" decoding="async" loading="lazy"
     onLoad="onOptImgLoad"
     alt="${config.description}"
-    src="${config.imagesURI}${config.folderName}/${
-      config.defaultImageSize
-    }.${config.defaultImageFormat}"
+    src="${config.imagesURI}${config.folderName}/${config.defaultImageSize}.${
+      config.defaultImageFormat
+    }"
     width="${config.dimension.width}"
     height="${config.dimension.height}"
     ${this.createSourceSet({
-          pathName: config.imagesURI + config.folderName,
-          format: config.defaultImageFormat,
-          availableSizes: config.availableImageSizes,
-        })}/>`;
+      pathName: config.imagesURI + config.folderName,
+      format: config.defaultImageFormat,
+      availableSizes: config.availableImageSizes,
+    })}/>`;
   }
 
   getPictureSourceTag(config: {
@@ -86,9 +100,7 @@ export class CodeSnippetService {
     availableSizes: ImageSize[];
   }) {
     return `<source type="image/${config.format}" sizes="100vw" 
-    ${this.createSourceSet(
-      config
-    )}/>
+    ${this.createSourceSet(config)}/>
 `;
   }
 

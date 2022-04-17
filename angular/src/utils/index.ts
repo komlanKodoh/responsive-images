@@ -43,7 +43,10 @@ export async function getImageDimension(file: Blob) {
 
 }
 
-
+/**
+ * A file name returned by our api is of the form <ORIGINAL_FILENAME>-<UNIQUE_ID>.zip
+ * This function parses the name and returns a name of the form <ORIGINAL_FILENAME>.zip
+ */
 export function extractFileName(fileName: string){
   
   let i;
@@ -55,3 +58,10 @@ export function extractFileName(fileName: string){
 
   return fileName;
 }
+
+
+/**
+ * Returns a random index from the given array
+ */
+ export const getRandomIndex = <T extends unknown>(items: T[]) =>
+ items[Math.floor(Math.random() * items.length)];

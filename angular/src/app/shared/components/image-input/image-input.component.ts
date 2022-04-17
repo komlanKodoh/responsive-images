@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { getBase64, getImageDimension } from '../../../../utils';
 
@@ -14,6 +14,7 @@ export class ImageInputComponent implements OnInit {
   preview: string | ArrayBuffer | null = null;
   size : {width: number, height: number} = {width: 0, height: 0};
 
+  @Input() label!: string ;
   @Output() newImageEvent = new EventEmitter<FileAndSize>();
 
   constructor() {}

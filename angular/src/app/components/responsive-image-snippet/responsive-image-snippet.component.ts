@@ -10,7 +10,6 @@ import { ImageFormat } from 'src/app/shared/services/image-optimizer.types';
   styleUrls: ['./responsive-image-snippet.component.scss'],
 })
 export class ResponsiveImageSnippetComponent implements OnInit {
-  
   @Input() snippetData!: SnippetData;
 
   snippetConfigForm: FormGroup;
@@ -19,8 +18,8 @@ export class ResponsiveImageSnippetComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.snippetConfigForm = formBuilder.group({
-      imagesURI: '/static/',
       imageSizes: '100vw',
+      imagesURI: '/static/',
       defaultImageSize: '500',
       defaultImageFormat: 'jpeg',
       folderName: '<FOLDER_NAME>',
@@ -30,17 +29,27 @@ export class ResponsiveImageSnippetComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  ngOnChanges(changes: SimpleChanges): void{
-    
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['snippetData']) {
+
+      this.snippetConfigForm.patchValue({
+        folderName: (changes['snippetData'].currentValue as SnippetData)
+          .folderName,
+      });
+    }
   }
 
   getCSS() {
-    if (!this.snippetData.placeholder) {return '';}
+    if (!this.snippetData.placeholder) {
+      return 'Lucky you, No css to copy !!';
+    }
     return this.codeSnippetService.getCSS();
   }
 
   getJavascript() {
-    if (!this.snippetData.placeholder) {return '';}
+    if (!this.snippetData.placeholder) {
+      return 'Lucky you, no javascript to add !!';
+    }
     return this.codeSnippetService.getJavascript();
   }
 

@@ -1,3 +1,4 @@
+import { getRandomIndex } from './../../utils/index';
 import { Component, OnInit } from '@angular/core';
 import { HighlightAutoResult } from 'ngx-highlightjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -22,12 +23,18 @@ export class LandingPageComponent implements OnInit {
   file: FileAndSize | null = null;
 
   zipId: string = '';
-  zipUrl: string = '';
+  zipUrl: string = './';
   zipName: string = '<IMAGE_NAME>';
 
   currentOptimizationConfig?: OptimizationConfig;
 
   imagePlaceholder: string = '<IMAGE_PLACEHOLDER>';
+  splashColor: string = getRandomIndex([
+    '#FF0000',
+    '#FF8200',
+    '#FFC100',
+    '#FFEAAE',
+  ]);
 
   constructor(
     private imageOptimizerService: ImageOptimizerService,
@@ -81,7 +88,7 @@ export class LandingPageComponent implements OnInit {
   setZipId(value: string) {
     this.zipId = value;
     this.zipUrl = `/storage/${value}`;
-    this.zipName = extractFileName(value) + ".zip";
+    this.zipName = extractFileName(value) + '.zip';
   }
 
   getSnippetData() {
@@ -90,7 +97,7 @@ export class LandingPageComponent implements OnInit {
       dimension: this.file?.dimension || { width: 0, height: 0 },
       folderName: this.zipName,
       availableImageSizes: this.currentOptimizationConfig?.sizes || [],
-      availableImageFormat: this.currentOptimizationConfig || {}
+      availableImageFormat: this.currentOptimizationConfig || {},
     };
   }
 }

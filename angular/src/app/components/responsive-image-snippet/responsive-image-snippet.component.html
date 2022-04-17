@@ -1,22 +1,27 @@
 <form class="m-auto my-7 w-full max-w-lg" [formGroup]="snippetConfigForm">
-    
+
     <h2>Code snippet</h2>
-    
+
     <mat-form-field class="w-full" appearance="fill">
-        <mat-label> Directory Name </mat-label>
-        <input formControlName="folderName" matInput placeholder="Ex. Pizza" value="Sushi">
+        <mat-label labelFor="directoryNameInput">
+            Directory Name </mat-label>
+        <input id="directoryNameInput"
+            matTooltip="This is the name of the folder containing the decompressed files. By default it uses the name of the uploaded image."
+            formControlName="folderName" matInput placeholder="Ex. Pizza" value="Sushi">
     </mat-form-field>
-    
+
     <mat-form-field class="w-full" appearance="fill">
-        <mat-label> Image URI </mat-label>
-        <input formControlName="imagesURI" matInput placeholder="Ex. Pizza" value="Sushi">
+        <mat-label for="imageURI"> Image URI </mat-label>
+        <input id="imageURIInput"
+            matTooltip="The image uri is a public directory of your servers where you will put the decompressed zip files."
+            formControlName="imagesURI" matInput placeholder="Ex. Pizza" value="Sushi">
     </mat-form-field>
 
     <div class="w-full grid grid-cols-2 gap-1">
         <!-- Default Image size -->
         <mat-form-field class="w-full" appearance="fill">
-            <mat-label>Default image size</mat-label>
-            <mat-select formControlName="defaultImageSize">
+            <mat-label for="defaultImageSizeSelect">Default image size</mat-label>
+            <mat-select id="defaultImageSizeSelect" formControlName="defaultImageSize">
                 <mat-option value="250" [disabled]="!imageSizeIsAvailable(250)"> 250 px </mat-option>
                 <mat-option value="500" [disabled]="!imageSizeIsAvailable(500)"> 500 px </mat-option>
                 <mat-option value="750" [disabled]="!imageSizeIsAvailable(750)"> 750 px </mat-option>
@@ -26,8 +31,8 @@
 
         <!-- Default Image Format -->
         <mat-form-field class="w-full" appearance="fill">
-            <mat-label>Default image format</mat-label>
-            <mat-select formControlName="defaultImageFormat">
+            <mat-label for="defaultImageFormatSelect">Default image format</mat-label>
+            <mat-select id="defaultImageFormatSelect" formControlName="defaultImageFormat">
                 <mat-option value="jpeg" [disabled]="!formatIsAvailable('jpeg')">jpeg</mat-option>
                 <mat-option value="webp" [disabled]="!formatIsAvailable('webp')">webp</mat-option>
                 <mat-option value="png" [disabled]="!formatIsAvailable('png')">png</mat-option>
@@ -38,13 +43,16 @@
 
 
     <mat-form-field class="w-full" appearance="fill">
-        <mat-label> image description </mat-label>
-        <input formControlName="description" matInput placeholder="Ex. Pizza" value="Sushi">
+        <mat-label for="imageDescriptionInput" id="description"> image description </mat-label>
+        <input
+            matTooltip="The description is used as the default text for if the image does not load and for screen readers"
+            id="imageDescriptionInput" formControlName="description" matInput placeholder="Ex. Pizza" value="Sushi">
     </mat-form-field>
 
     <mat-form-field class="w-full" appearance="fill">
-        <mat-label> Image sizes </mat-label>
-        <input formControlName="imageSizes" matInput placeholder="Ex. Pizza" value="Sushi">
+        <mat-label for="imageSizesInput"> Image sizes </mat-label>
+        <input matTooltip="Used to tell the browser what sizes the image will have on the screen. " id="imageSizesInput"
+            formControlName="imageSizes" matInput placeholder="Ex. Pizza" value="Sushi">
     </mat-form-field>
 
 
@@ -52,12 +60,14 @@
 
 <mat-tab-group class="mat-tab-body-wrapper" mat-align-tabs="center" class="max-w-screen-xl m-auto" dynamicHeight>
     <mat-tab label="HTML">
-        <app-code-display class="h-[35em]" name="HTML"[code]="getHTML()"></app-code-display>
+        <app-code-display class="h-[35em]" name="HTML" [code]="getHTML()"></app-code-display>
     </mat-tab>
     <mat-tab label="CSS">
-        <app-code-display class="h-[35em]" name="CSS" [code]="getCSS()"></app-code-display>    </mat-tab>
+        <app-code-display class="h-[35em]" name="CSS" [code]="getCSS()"></app-code-display>
+    </mat-tab>
     <mat-tab label="Javascript">
-        <app-code-display class="h-[35em]" name="Javascript" [code]="getJavascript()"></app-code-display>    </mat-tab>
+        <app-code-display class="h-[35em]" name="Javascript" [code]="getJavascript()"></app-code-display>
+    </mat-tab>
 </mat-tab-group>
 
 <div class="m-auto py-8 w-fit ">
