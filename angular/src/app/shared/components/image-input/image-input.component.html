@@ -1,7 +1,7 @@
 <img [ngClass]="size.width >= size.height && 'w-full absolute-center' || 'h-full absolute-center' "
     [src]="preview"><img>
 
-<div [ngClass]="(size.width >= size.height && 'w-full absolute-center' || 'h-full absolute-center') + ' flex flex-col w-fit px-5 py-2 rounded shadow-md bg-white/90 backdrop-blur-lg' ">
+<div [ngClass]="(size.width >= size.height && 'w-full absolute-center' || 'h-full absolute-center') + ' flex flex-col w-fit px-5 py-2 rounded shadow-md bg-white backdrop-blur-lg' ">
     <p class="w-fit m-auto">Drag and drop or</p> <br/>
     <button mat-stroked-button color="warm" class="w-fit m-auto text-green-700"> Upload </button>
 </div>

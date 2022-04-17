@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { ImageInputComponent } from './image-input/image-input.component';
 import { NumberInputComponent } from './number-input/number-input.component';
+import { IconsModule } from './icons/icons.module';
 
 
 
@@ -18,8 +19,9 @@ import { NumberInputComponent } from './number-input/number-input.component';
     ReactiveFormsModule,
   ],
   exports : [
+    IconsModule,
     ImageInputComponent,
-    NumberInputComponent
+    NumberInputComponent,
   ]
 })
 export class ComponentsModule { }

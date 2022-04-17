@@ -81,11 +81,10 @@ export class LandingPageComponent implements OnInit {
   setZipId(value: string) {
     this.zipId = value;
     this.zipUrl = `/storage/${value}`;
-    this.zipName = extractFileName(value);
+    this.zipName = extractFileName(value) + ".zip";
   }
 
   getSnippetData() {
-    
     return {
       placeholder: this.imagePlaceholder,
       dimension: this.file?.dimension || { width: 0, height: 0 },

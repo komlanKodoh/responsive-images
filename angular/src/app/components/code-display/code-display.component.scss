@@ -1,0 +1,24 @@
+
+
+.copy-button {
+    --active-color: rgb(189, 189, 189);
+
+    rect:nth-child(2){
+        transition: transform 0.2s ease-in-out, fill 0.2s ease-in-out;
+        transform: translate(-4px, -4px);
+    }
+}
+
+.copy-button:hover{
+    --active-color: rgb(17, 225, 240);
+    rect:nth-child(2){
+        transform: translate(-2px, -2px);
+    }
+}
+
+.copy-button:active{
+    --active-color: rgb(26, 191, 106);
+    rect:nth-child(2){
+        transform: translate(0px, 0px);
+    }
+}

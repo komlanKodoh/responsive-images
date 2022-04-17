@@ -49,9 +49,9 @@ export class ImageOptimizerService {
       png: new FormControl(false),
 
       // sizes
-      250: new FormControl(false),
-      500: new FormControl(false),
-      750: new FormControl(false),
+      250: new FormControl(true),
+      500: new FormControl(true),
+      750: new FormControl(true),
       1000: new FormControl(false),
 
       //The width of the place holder

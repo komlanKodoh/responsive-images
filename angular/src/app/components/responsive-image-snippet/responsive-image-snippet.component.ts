@@ -1,5 +1,5 @@
 import { ImageSize } from './../../shared/services/image-optimizer.types';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CodeSnippetService } from 'src/app/shared/services/code-snippet.service';
 import { ImageFormat } from 'src/app/shared/services/image-optimizer.types';
@@ -10,6 +10,7 @@ import { ImageFormat } from 'src/app/shared/services/image-optimizer.types';
   styleUrls: ['./responsive-image-snippet.component.scss'],
 })
 export class ResponsiveImageSnippetComponent implements OnInit {
+  
   @Input() snippetData!: SnippetData;
 
   snippetConfigForm: FormGroup;
@@ -22,11 +23,16 @@ export class ResponsiveImageSnippetComponent implements OnInit {
       imageSizes: '100vw',
       defaultImageSize: '500',
       defaultImageFormat: 'jpeg',
+      folderName: '<FOLDER_NAME>',
       description: 'author was to lazy to add a description',
     });
   }
 
   ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges): void{
+    
+  }
 
   getCSS() {
     if (!this.snippetData.placeholder) {return '';}
@@ -61,7 +67,7 @@ export class ResponsiveImageSnippetComponent implements OnInit {
   }
 }
 
-interface SnippetData {
+export interface SnippetData {
   /**
    * Base 64 version of the image ( serves as a preview if the image has not yet loaded )
    */

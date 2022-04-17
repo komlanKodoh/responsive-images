@@ -1,7 +1,12 @@
 <form class="m-auto my-7 w-full max-w-lg" [formGroup]="snippetConfigForm">
-
+    
     <h2>Code snippet</h2>
-
+    
+    <mat-form-field class="w-full" appearance="fill">
+        <mat-label> Directory Name </mat-label>
+        <input formControlName="folderName" matInput placeholder="Ex. Pizza" value="Sushi">
+    </mat-form-field>
+    
     <mat-form-field class="w-full" appearance="fill">
         <mat-label> Image URI </mat-label>
         <input formControlName="imagesURI" matInput placeholder="Ex. Pizza" value="Sushi">
@@ -42,18 +47,17 @@
         <input formControlName="imageSizes" matInput placeholder="Ex. Pizza" value="Sushi">
     </mat-form-field>
 
+
 </form>
 
-<mat-tab-group class="mat-tab-body-wrapper" mat-align-tabs="center" class="max-w-screen-lg m-auto" dynamicHeight>
+<mat-tab-group class="mat-tab-body-wrapper" mat-align-tabs="center" class="max-w-screen-xl m-auto" dynamicHeight>
     <mat-tab label="HTML">
-        <pre><code class="tab" [highlight]="getHTML()"  [lineNumbers]="true"></code></pre>
+        <app-code-display class="h-[35em]" name="HTML"[code]="getHTML()"></app-code-display>
     </mat-tab>
     <mat-tab label="CSS">
-        <pre><code class="tab" [highlight]="getCSS()"  [lineNumbers]="true"></code></pre>
-    </mat-tab>
+        <app-code-display class="h-[35em]" name="CSS" [code]="getCSS()"></app-code-display>    </mat-tab>
     <mat-tab label="Javascript">
-        <pre><code class="tab" [highlight]="getJavascript()"  [lineNumbers]="true" ></code></pre>
-    </mat-tab>
+        <app-code-display class="h-[35em]" name="Javascript" [code]="getJavascript()"></app-code-display>    </mat-tab>
 </mat-tab-group>
 
 <div class="m-auto py-8 w-fit ">
