@@ -12,9 +12,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-
 
 @NgModule({
   declarations: [],
@@ -29,7 +29,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatCheckboxModule,
     MatFormFieldModule,
     MatFormFieldModule,
-
+    MatProgressBarModule,
+    
     // MatRadioModule,
     // MatDatepickerModule,
     // MatCheckboxModule,

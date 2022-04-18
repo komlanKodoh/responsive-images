@@ -36,6 +36,8 @@ export class LandingPageComponent implements OnInit {
     '#FFEAAE',
   ]);
 
+  isLoading: boolean = false;
+
   constructor(
     private imageOptimizerService: ImageOptimizerService,
     public codeSnippetService: CodeSnippetService,
@@ -60,6 +62,7 @@ export class LandingPageComponent implements OnInit {
       this.optimizationConfig.getRawValue() as OptimizationConfigForm
     );
 
+    this.isLoading = true;
     this.imageOptimizerService
       .optimize(this.file, config)
       .subscribe((event: any) => {
@@ -68,6 +71,7 @@ export class LandingPageComponent implements OnInit {
         }
 
         if (event.type === HttpEventType.Response) {
+          this.isLoading = false;
           this.setZipId(event.body.data.id);
 
           this.currentOptimizationConfig = config;

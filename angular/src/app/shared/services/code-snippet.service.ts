@@ -85,7 +85,7 @@ export class CodeSnippetService {
     return `<img style="opacity: 1;" sizes="${
       config.imageSizes
     }" decoding="async" loading="lazy"
-    onLoad="onOptImgLoad(event)"
+    ${config.placeholder && `onLoad="onOptImgLoad(event)"`}
     alt="${config.description}"
     src="${config.imagesURI}${config.folderName}/${config.defaultImageSize}.${
       config.defaultImageFormat
@@ -115,7 +115,7 @@ export class CodeSnippetService {
     availableSizes: ImageSize[];
   }) {
     const getSizeDirective = (size: ImageSize) => {
-      return `${encodeURIComponent(config.pathName)}/${size}.${config.format} ${size}w`;
+      return `${config.pathName}/${size}.${config.format} ${size}w`;
     };
 
     return `srcset="${config.availableSizes
