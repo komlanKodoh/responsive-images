@@ -68,7 +68,7 @@ export class ResponsiveImageSnippetComponent implements OnInit {
       availableImageFormat: (['jpeg', 'png', 'webp'] as const).filter(
         (format) => this.snippetData.availableImageFormat[format]
       ),
-      folderName: encodeURIComponent(this.snippetData.folderName)
+      folderName: encodeURIComponent(this.snippetConfigForm.value.folderName)
     });
   }
 
