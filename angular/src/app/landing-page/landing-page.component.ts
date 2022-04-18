@@ -87,7 +87,7 @@ export class LandingPageComponent implements OnInit {
 
   setZipId(value: string) {
     this.zipId = value;
-    this.zipUrl = `/static/storage/${value}`;
+    this.zipUrl = `/storage/${value}`;
     this.zipName = extractFileName(value);
   }
 
