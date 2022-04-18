@@ -33,10 +33,10 @@ export class ResponsiveImageSnippetComponent implements OnInit {
     if (changes['snippetData']) {
       let previousFolderName = (
         changes['snippetData'].previousValue as SnippetData
-      ).folderName;
+      )?.folderName;
       let currentFolderName = (
         changes['snippetData'].currentValue as SnippetData
-      ).folderName;
+      )?.folderName;
 
       if (previousFolderName != currentFolderName) {
         this.snippetConfigForm.patchValue({

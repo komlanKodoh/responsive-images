@@ -22,6 +22,11 @@ export class CodeSnippetService {
   transition: opacity 0.5s ease-in-out;
 }
 
+.opt-img img {
+  width: 100%;
+  height: auto;
+}
+
 .opt-img.loaded > img {
   opacity: 0;
 }
@@ -80,7 +85,7 @@ export class CodeSnippetService {
     return `<img style="opacity: 1;" sizes="${
       config.imageSizes
     }" decoding="async" loading="lazy"
-    onLoad="onOptImgLoad"
+    onLoad="onOptImgLoad(event)"
     alt="${config.description}"
     src="${config.imagesURI}${config.folderName}/${config.defaultImageSize}.${
       config.defaultImageFormat
@@ -110,7 +115,7 @@ export class CodeSnippetService {
     availableSizes: ImageSize[];
   }) {
     const getSizeDirective = (size: ImageSize) => {
-      return `${config.pathName}/${size}.${config.format} ${size}w`;
+      return `${encodeURIComponent(config.pathName)}/${size}.${config.format} ${size}w`;
     };
 
     return `srcset="${config.availableSizes
