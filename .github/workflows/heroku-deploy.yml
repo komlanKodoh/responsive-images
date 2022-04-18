@@ -52,6 +52,12 @@ jobs:
       - name : Build Docker image
         run : docker build . -t responsive-images
 
+      - name: run end to end tests
+        run : |
+            docker run -e PORT=80 -p 80:80 responsive-images && 
+            cd angular && 
+            npx cypress run &&
+            cd ../
 
       - name : Docker push to heroku repository
         
