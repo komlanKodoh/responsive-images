@@ -7,14 +7,14 @@
             Directory Name </mat-label>
         <input id="directoryNameInput"
             matTooltip="This is the name of the folder containing the decompressed files. By default it uses the name of the uploaded image."
-            formControlName="folderName" matInput placeholder="Ex. Pizza" value="Sushi">
+            formControlName="folderName" matInput placeholder="/decompressed-archive">
     </mat-form-field>
 
     <mat-form-field class="w-full" appearance="fill">
         <mat-label for="imageURI"> Image URI </mat-label>
         <input id="imageURIInput"
             matTooltip="The image uri is a public directory of your servers where you will put the decompressed zip files."
-            formControlName="imagesURI" matInput placeholder="Ex. Pizza" value="Sushi">
+            formControlName="imagesURI" matInput placeholder="/path/to/public-folder">
     </mat-form-field>
 
     <div class="w-full grid grid-cols-2 gap-1">
@@ -46,13 +46,13 @@
         <mat-label for="imageDescriptionInput" id="description"> image description </mat-label>
         <input
             matTooltip="The description is used as the default text for if the image does not load and for screen readers"
-            id="imageDescriptionInput" formControlName="description" matInput placeholder="Ex. Pizza" value="Sushi">
+            id="imageDescriptionInput" formControlName="description" matInput placeholder="Very cute image">
     </mat-form-field>
 
     <mat-form-field class="w-full" appearance="fill">
         <mat-label for="imageSizesInput"> Image sizes </mat-label>
         <input matTooltip="Used to tell the browser what sizes the image will have on the screen. " id="imageSizesInput"
-            formControlName="imageSizes" matInput placeholder="Ex. Pizza" value="Sushi">
+            formControlName="imageSizes" matInput placeholder="(max-width: 600px) 480px, 800px">
     </mat-form-field>
 
 
