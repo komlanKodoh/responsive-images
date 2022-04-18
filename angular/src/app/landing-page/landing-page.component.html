@@ -65,7 +65,7 @@
 
     </div>
 
-    <mat-progress-bar class="m-2" [style.opacity]="isLoading && 1 || 0" mode="indeterminate"></mat-progress-bar>
+    <mat-progress-bar aria-label="progress of image optimization" class="m-2" [style.opacity]="isLoading && 1 || 0" mode="indeterminate"></mat-progress-bar>
     <button class="w-fit mx-auto relative" mat-raised-button color="primary" (click)="onSubmit($event)"
       [disabled]="file === null || isLoading"> Optimize
     </button>
