@@ -10,7 +10,7 @@ RUN rm  /etc/nginx/sites-available/default
 
 COPY ./api /
 COPY ./run.sh /
-COPY ./static /static
+COPY ./static/pages /static/pages
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
 COPY ./responsive-images.conf /etc/nginx/conf.d/
