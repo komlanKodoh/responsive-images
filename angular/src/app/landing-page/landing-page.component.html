@@ -39,11 +39,10 @@
         </section>
 
         <br />
-        <label
+        <label for="placeholderWidthInput"> Placeholder width &nbsp;&nbsp;&nbsp;</label>
+        <input id="placeholderWidthInput"
           matTooltip="placeholder base64 that appears before image loads. Set to zero if you do not desire any placeholder"
-          for="placeholderWidthInput"> Placeholder width &nbsp;&nbsp;&nbsp;</label>
-        <input id="placeholderWidthInput" class=" w-[8ch]" formControlName="placeholderWidth" style="outline:none;"
-          type="number" min="0" max="249" />
+          class=" w-[8ch]" formControlName="placeholderWidth" style="outline:none;" type="number" min="0" max="249" />
 
       </div>
 
@@ -65,7 +64,8 @@
 
     </div>
 
-    <mat-progress-bar aria-label="progress of image optimization" class="m-2" [style.opacity]="isLoading && 1 || 0" mode="indeterminate"></mat-progress-bar>
+    <mat-progress-bar aria-label="progress of image optimization" class="m-2" [style.opacity]="isLoading && 1 || 0"
+      mode="indeterminate"></mat-progress-bar>
     <button class="w-fit mx-auto relative" mat-raised-button color="primary" (click)="onSubmit($event)"
       [disabled]="file === null || isLoading"> Optimize
     </button>
@@ -78,5 +78,5 @@
   [disabled]="zipId === '' "> Download optimized Images </a>
 
 <div class=" w-full max-w-2xl m-auto">
-  <app-responsive-image-snippet [snippetData]="getSnippetData()"> </app-responsive-image-snippet>
+  <app-responsive-image-snippet [snippetData]="getSnippetData()"></app-responsive-image-snippet>
 </div>
