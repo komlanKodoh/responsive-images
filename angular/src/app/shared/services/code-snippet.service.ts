@@ -43,7 +43,7 @@ export class CodeSnippetService {
 
   getHTML(config: codeSnippetConfig) {
     if (!config.placeholder) {
-      return `<picture>
+      return `\n\n<picture>
       ${config.availableImageFormat
         .filter((format) => format !== config.defaultImageFormat)
         .map((format) =>

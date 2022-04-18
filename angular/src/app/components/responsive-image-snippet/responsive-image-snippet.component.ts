@@ -31,24 +31,32 @@ export class ResponsiveImageSnippetComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['snippetData']) {
+      let previousFolderName = (
+        changes['snippetData'].previousValue as SnippetData
+      ).folderName;
+      let currentFolderName = (
+        changes['snippetData'].currentValue as SnippetData
+      ).folderName;
 
-      this.snippetConfigForm.patchValue({
-        folderName: (changes['snippetData'].currentValue as SnippetData)
-          .folderName,
-      });
+      if (previousFolderName != currentFolderName) {
+        this.snippetConfigForm.patchValue({
+          folderName: (changes['snippetData'].currentValue as SnippetData)
+            .folderName,
+        });
+      }
     }
   }
 
   getCSS() {
     if (!this.snippetData.placeholder) {
-      return 'Lucky you, No css to copy !!';
+      return '\n\nLucky you, No css to copy !!';
     }
     return this.codeSnippetService.getCSS();
   }
 
   getJavascript() {
     if (!this.snippetData.placeholder) {
-      return 'Lucky you, no javascript to add !!';
+      return '\n\nLucky you, no javascript to add !!';
     }
     return this.codeSnippetService.getJavascript();
   }
