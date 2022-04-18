@@ -54,10 +54,11 @@ jobs:
 
       - name: run end to end tests
         run : |
-            docker run -e PORT=80 -p 80:80 responsive-images && 
+            docker run -e PORT=80 -p 80:80 -d responsive-images && 
             cd angular && 
-            npx cypress run &&
-            cd ../
+            npx cypress run && 
+            docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) &&
+            cd ../ 
 
       - name : Docker push to heroku repository
         
