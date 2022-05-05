@@ -23,7 +23,7 @@ export class ResponsiveImageSnippetComponent implements OnInit {
       defaultImageSize: '500',
       defaultImageFormat: 'jpeg',
       folderName: '<FOLDER_NAME>',
-      description: 'author was to lazy to add a description',
+      description: 'No description , Sorry !',
     });
   }
 
