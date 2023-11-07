@@ -1,0 +1,87 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: optimizer
+  labels:
+    name: optimizer
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: optimizer-volume
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: do-block-storage
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: optimizer
+  name: optimizer-server
+  labels:
+    app: optimizer-server
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: optimizer-server
+
+  template:
+    metadata:
+      labels:
+        app: optimizer-server
+
+    spec:
+      containers:
+        - name: responsive-images
+          image: postrgresslearn/responsive-images
+          ports:
+            - containerPort: 80
+
+          volumeMounts:
+            - mountPath: "/static/"
+              name: optimizer-volume
+
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "300M"
+
+            limits:
+              cpu: "250m"
+              memory: "300M"
+
+      volumes:
+        - name: optimizer-volume
+          persistentVolumeClaim:
+            claimName: optimizer-volume
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: load-balancer
+  namespace: optimizer
+  labels:
+    app: load-balancer
+
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+
+    - name: https
+      port: 443
+      targetPort: 443
+
+  selector:
+    app: optimizer-server

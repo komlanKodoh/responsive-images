@@ -5,6 +5,9 @@ import { ScullyConfig } from '@scullyio/scully';
 
 
 export const config: ScullyConfig = {
+  puppeteerLaunchOptions: {
+    executablePath: "/bin/chromium-browser"
+  },
   projectRoot: "./src",
   projectName: "angular",
   spsModulePath: 'YOUR OWN MODULE PATH HERE',
